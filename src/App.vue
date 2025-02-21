@@ -1,10 +1,9 @@
 <script setup>
-
-import Sidebar from "@/components/Sidebar.vue";
+import Employees from "@/components/Employees.vue";
 </script>
 
 <template>
-    <Sidebar />
+    <Employees />
 </template>
 
 <style scoped>
