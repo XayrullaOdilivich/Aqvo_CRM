@@ -23,23 +23,23 @@ const createModal = () => {
         <div v-if="showUpdateModal" class="modal">
             <div class="modal-content">
                 <div class="form">
-                    <h1>Magazini tahrirlash</h1>
-                    <label for="exampleFormControlInput1" class="form-label">Magazin Nomi</label>
+                    <h1>Hodimni tahrirlash</h1>
+                    <label for="exampleFormControlInput1" class="form-label">Ism</label>
                     <input
                         type="text"
                         class="form-control"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        placeholder="Magazin nomini kiriting"
+                        placeholder="hodimnign ismi"
                         required
                     >
-                    <label for="exampleFormControlInput1" class="form-label">Manzili</label>
+                    <label for="exampleFormControlInput1" class="form-label">Familiya</label>
                     <input
                         type="text"
                         class="form-control"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        placeholder="Magazin manzilini kiriting"
+                        placeholder="hodimning familyasi"
                         required
                     >
                     <label for="exampleFormControlInput1" class="form-label">Telefon raqami</label>
@@ -51,30 +51,57 @@ const createModal = () => {
                         placeholder="+998 99 999 99 99"
                         required
                     >
-                    <button @click="closedModal" class="btn btn-primary">Yuborish</button>
+                    <label for="exampleFormControlInput1" class="form-label">Lavozimi</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        placeholder="lavozim"
+                        required
+                    >
+                    <label for="exampleFormControlInput1" class="form-label">Oylik</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        placeholder="maosh"
+                        required
+                    >
+                    <label for="exampleFormControlInput1" class="form-label">Ishni boshlash sanasi</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        placeholder="sana"
+                        required
+                    >
+                    <button @click="closedModal" class="btn btn-primary">Tahrirlash</button>
                 </div>
             </div>
         </div>
         <div v-if="showCreateModal" class="modal">
             <div class="modal-content">
                 <div class="form">
-                    <h1>Magazin qo'shish</h1>
-                    <label for="exampleFormControlInput1" class="form-label">Magazin Nomi</label>
+                    <h1>Hodim qo'shish</h1>
+                    <label for="exampleFormControlInput1" class="form-label">Ism</label>
                     <input
                         type="text"
                         class="form-control"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        placeholder="Magazin nomini kiriting"
+                        placeholder="hodimnign ismi"
                         required
                     >
-                    <label for="exampleFormControlInput1" class="form-label">Manzili</label>
+                    <label for="exampleFormControlInput1" class="form-label">Familiya</label>
                     <input
                         type="text"
                         class="form-control"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        placeholder="Magazin manzilini kiriting"
+                        placeholder="hodimning familyasi"
                         required
                     >
                     <label for="exampleFormControlInput1" class="form-label">Telefon raqami</label>
@@ -86,14 +113,46 @@ const createModal = () => {
                         placeholder="+998 99 999 99 99"
                         required
                     >
-                    <button @click="closedModal" class="btn btn-primary">Yuborish</button>
+                    <label for="exampleFormControlInput1" class="form-label">Lavozimi</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        placeholder="lavozim"
+                        required
+                    >
+                    <label for="exampleFormControlInput1" class="form-label">Oylik</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        placeholder="maosh"
+                        required
+                    >
+                    <label for="exampleFormControlInput1" class="form-label">Ishni boshlash sanasi</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        placeholder="sana"
+                        required
+                    >
+                    <button @click="closedModal" class="btn btn-primary">Qo'shish</button>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="header">
-                <p>Ombor</p>
-                <button type="button" @click="createModal" class="btn btn-primary add-category">Yangi hodim qo'shish</button>
+                <p>Hodimlar</p>
+                <div class="header-buttons">
+                    <router-link to="/admin/employees/StaffContinent" class="btn btn-primary add-category">
+                        Davomatga o'tish
+                    </router-link>
+                    <button type="button" @click="createModal" class="btn btn-primary add-category">Yangi hodim qo'shish</button>
+                </div>
             </div>
             <div>
                 <div class="table-container">
@@ -101,18 +160,118 @@ const createModal = () => {
                         <thead class="table-head">
                         <tr>
                             <th>No.</th>
-                            <th>Nomi</th>
-                            <th>Manzili</th>
-                            <th>Telefon</th>
+                            <th>Ism</th>
+                            <th>Telefon raqam</th>
+                            <th>Oylik daromadi</th>
                             <th>Amallar</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Makro</td>
-                            <td>Seul ko'chasi, Besh-Yog`och mahallasi, Chilonzor Tumani, Toshkent, 100000, Oʻzbekiston</td>
+                            <td>Behruzbek</td>
                             <td>+998 99 999 99 99</td>
+                            <td>18 000 000</td>
+                            <td>
+                                <button class="update" @click="updateModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                    </svg>
+                                </button>
+                                <button class="delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Behruzbek</td>
+                            <td>+998 99 999 99 99</td>
+                            <td>18 000 000</td>
+                            <td>
+                                <button class="update" @click="updateModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                    </svg>
+                                </button>
+                                <button class="delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Behruzbek</td>
+                            <td>+998 99 999 99 99</td>
+                            <td>18 000 000</td>
+                            <td>
+                                <button class="update" @click="updateModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                    </svg>
+                                </button>
+                                <button class="delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Behruzbek</td>
+                            <td>+998 99 999 99 99</td>
+                            <td>18 000 000</td>
+                            <td>
+                                <button class="update" @click="updateModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                    </svg>
+                                </button>
+                                <button class="delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Behruzbek</td>
+                            <td>+998 99 999 99 99</td>
+                            <td>18 000 000</td>
+                            <td>
+                                <button class="update" @click="updateModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                    </svg>
+                                </button>
+                                <button class="delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Behruzbek</td>
+                            <td>+998 99 999 99 99</td>
+                            <td>18 000 000</td>
                             <td>
                                 <button class="update" @click="updateModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -157,7 +316,7 @@ label {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Qoraytirish */
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,12 +337,22 @@ label {
     transform: translateY(-20%);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
-
 .header {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    justify-content: space-between;
+    width: 100%;
 }
+
+.header p {
+    margin: 0;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
 
 .delete {
     border: none;
@@ -200,6 +369,7 @@ label {
 
 .add-category {
     margin-left: auto;
+    margin: 20px;
 }
 
 .table-container {
@@ -222,7 +392,6 @@ th, td {
     border: 1px solid #ddd;
 }
 
-/* Jadval hover bo'lganda fon rangi o'zgaradi */
 .table-hover tbody tr:hover {
     background-color: #e5e7eb !important;
 }

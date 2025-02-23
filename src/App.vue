@@ -1,9 +1,8 @@
 <script setup>
-import Employees from "@/components/Employees.vue";
 </script>
 
 <template>
-    <Employees />
+    <RouterView />
 </template>
 
 <style scoped>

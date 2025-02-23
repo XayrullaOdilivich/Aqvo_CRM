@@ -40,7 +40,7 @@ const toggleSidebar = () => {
                     Statistika
                 </div>
             </router-link>
-            <router-link to="/" class="menu-link">
+            <router-link to="/admin/category" class="menu-link">
                 <div class="menu">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 640 512"
                          class="ant-menu-item-icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ const toggleSidebar = () => {
                     Ombor
                 </div>
             </router-link>
-            <router-link to="/" class="menu-link">
+            <router-link to="/admin/shops" class="menu-link">
                 <div class="menu">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16"
                          class="ant-menu-item-icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ const toggleSidebar = () => {
                     Magazinlar
                 </div>
             </router-link>
-            <router-link to="/" class="menu-link">
+            <router-link to="/admin/employees" class="menu-link">
                 <div class="menu">
                     <svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"
                          class="ant-menu-item-icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ const toggleSidebar = () => {
                     Hodimlar
                 </div>
             </router-link>
-            <router-link to="/" class="menu-link">
+            <router-link to="/admin/products" class="menu-link">
                 <div class="menu">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024"
                          fill-rule="evenodd" class="ant-menu-item-icon" height="1em"
