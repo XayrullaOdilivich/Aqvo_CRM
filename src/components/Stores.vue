@@ -129,7 +129,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>2</td>
                             <td>Makro</td>
                             <td>Seul ko'chasi, Besh-Yog`och mahallasi, Chilonzor Tumani, Toshkent, 100000, Oʻzbekiston</td>
                             <td>+998 99 999 99 99</td>
@@ -149,7 +149,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>3</td>
                             <td>Makro</td>
                             <td>Seul ko'chasi, Besh-Yog`och mahallasi, Chilonzor Tumani, Toshkent, 100000, Oʻzbekiston</td>
                             <td>+998 99 999 99 99</td>
@@ -169,7 +169,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>4</td>
                             <td>Makro</td>
                             <td>Seul ko'chasi, Besh-Yog`och mahallasi, Chilonzor Tumani, Toshkent, 100000, Oʻzbekiston</td>
                             <td>+998 99 999 99 99</td>
@@ -189,7 +189,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>5</td>
                             <td>Makro</td>
                             <td>Seul ko'chasi, Besh-Yog`och mahallasi, Chilonzor Tumani, Toshkent, 100000, Oʻzbekiston</td>
                             <td>+998 99 999 99 99</td>

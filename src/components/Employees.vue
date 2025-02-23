@@ -208,7 +208,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>2</td>
                             <td>Behruzbek</td>
                             <td>+998 99 999 99 99</td>
                             <td>18 000 000</td>
@@ -228,7 +228,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>3</td>
                             <td>Behruzbek</td>
                             <td>+998 99 999 99 99</td>
                             <td>18 000 000</td>
@@ -248,7 +248,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>4</td>
                             <td>Behruzbek</td>
                             <td>+998 99 999 99 99</td>
                             <td>18 000 000</td>
@@ -268,7 +268,7 @@ const createModal = () => {
                         </tbody>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>5</td>
                             <td>Behruzbek</td>
                             <td>+998 99 999 99 99</td>
                             <td>18 000 000</td>
