@@ -191,7 +191,6 @@ const createModal = () => {
         </div>
     </side-bar-slot>
 </template>
-
 <style scoped>
 .container-fluid {
     background-color: white;
