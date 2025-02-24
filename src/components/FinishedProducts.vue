@@ -17,7 +17,6 @@ const createModal = () => {
     showCreateModal.value = true;
 }
 </script>
-
 <template>
     <side-bar-slot>
         <div v-if="showUpdateModal" class="modal">
