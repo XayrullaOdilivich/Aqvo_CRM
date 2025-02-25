@@ -1,32 +1,100 @@
 <script setup>
 import SideBarSlot from "@/components/SideBarSlot.vue";
-import {onMounted, ref} from "vue";
-import {useDynamicStore} from "@/pinia/store.js";
+import { onMounted, ref } from "vue";
+import { useDynamicStore } from "@/pinia/store.js";
+import { useCreateStore } from "@/pinia/create.js";
+import { useToast } from "vue-toastification";
+import {useDelete} from "@/pinia/delete.js";
+import {useUpdateStore} from "@/pinia/update.js";
+
+const toast = useToast();
+const selectedWarehouse = ref(null);
 
 const showUpdateModal = ref(false);
 const showCreateModal = ref(false);
 
-const updateModal = () => {
+const updateModal = (item) => {
+    selectedWarehouse.value = { ...item };
     showUpdateModal.value = true;
 };
+
 const closedModal = () => {
     showUpdateModal.value = false;
     showCreateModal.value = false;
-
 };
 const createModal = () => {
     showCreateModal.value = true;
 }
 
-const store = useDynamicStore()
-const warehouse = ref([])
+const deleteStore = useDelete()
+const store = useDynamicStore();
+const updateStore = useUpdateStore()
+const warehouse = ref([]);
+const create = useCreateStore();
+const crateData = {
+    category: '',
+    unit: ''
+};
+
+const crateWarehouse = async () => {
+    try {
+        await create.fetchPost('/categories', crateData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        toast.success("Kategoriya qo‘shildi!", { timeout: 3000 });
+        closedModal();
+    } catch (error) {
+        console.log("Xato");
+        toast.error("Kategoriya qo‘shishda xatolik!", { timeout: 5000 });
+        closedModal();
+    }
+};
 
 onMounted(async () => {
-    await store.fetchData('warehouse', '/categories');
-    console.log("Fetched Data:", store.data.warehouse);
+    await store.fetchData("warehouse", "/categories");
     warehouse.value = store.data?.warehouse?.data;
 });
 
+const updateWarehouse = async (id) => {
+    try {
+        const updatedData = {
+            category: selectedWarehouse.value.category,
+            unit: selectedWarehouse.value.unit
+        };
+        await updateStore.fetchPut(`/categories/${selectedWarehouse.value.id}`, updatedData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        closedModal()
+        toast.success("Mahsulot muvaffaqiyatli o'zgartirildi!", { timeout: 3000 });
+
+        warehouse.value = warehouse.value.map(item =>
+            item.id === selectedWarehouse.value.id ? { ...selectedWarehouse.value } : item
+        );
+    } catch (error) {
+        closedModal()
+        toast.error("Mahsulotni o‘zgartirishda xatolik yuz berdi!", { timeout: 5000 });
+    }
+};
+
+const deleteWarehouse = async (id) => {
+    if (!confirm("Haqiqatan ham ushbu mahsulotni o‘chirmoqchimisiz?")) {
+        return;
+    }
+
+    try {
+        await deleteStore.Delete(`/categories/${id}`);
+        toast.success("Mahsulot muvaffaqiyatli o‘chirildi!", { timeout: 3000 });
+
+        warehouse.value = warehouse.value.filter(item => item.id !== id);
+    } catch (error) {
+        toast.error("Mahsulotni o‘chirishda xatolik yuz berdi!", { timeout: 5000 });
+    }
+};
 </script>
 
 <template>
@@ -37,6 +105,7 @@ onMounted(async () => {
                     <h1>Kategoriyani tahrirlash</h1>
                     <label for="exampleFormControlInput1" class="form-label">Kategoriya Nomi</label>
                     <input
+                        v-model="selectedWarehouse.category"
                         type="text"
                         class="form-control"
                         aria-label="Sizing example input"
@@ -44,14 +113,14 @@ onMounted(async () => {
                         required
                     >
                     <label for="exampleFormControlInput1" class="form-label">Miqdor Turi</label>
-                    <select class="form-select">
+                    <select class="form-select" v-model="selectedWarehouse.unit">
                         <option value="" selected disabled>Miqdor turini tanlang</option>
-                        <option>Kilogramm</option>
-                        <option>Dona</option>
-                        <option>Pachka</option>
-                        <option>Letir</option>
+                        <option value="KG">Kilogramm</option>
+                        <option value="DONA">Dona</option>
+                        <option value="PACHKA">Pachka</option>
+                        <option value="LETIR">Letir</option>
                     </select>
-                    <button @click="closedModal" class="btn btn-primary">Saqlash</button>
+                    <button @click="updateWarehouse" class="btn btn-primary">Saqlash</button>
                 </div>
             </div>
         </div>
@@ -61,6 +130,7 @@ onMounted(async () => {
                     <h1>Kategoriyani Qo'shish</h1>
                     <label for="exampleFormControlInput1" class="form-label">Kategoriya Nomi</label>
                     <input
+                        v-model="crateData.category"
                         type="text"
                         class="form-control"
                         aria-label="Sizing example input"
@@ -68,14 +138,14 @@ onMounted(async () => {
                         required
                     >
                     <label for="exampleFormControlInput1" class="form-label">Miqdor Turi</label>
-                    <select class="form-select">
+                    <select class="form-select" v-model="crateData.unit">
                         <option value="" selected disabled>Miqdor turini tanlang</option>
-                        <option>Kilogramm</option>
-                        <option>Dona</option>
-                        <option>Pachka</option>
-                        <option>Letir</option>
+                        <option value="KG">Kilogramm</option>
+                        <option value="DONA">Dona</option>
+                        <option value="PACHKA">Pachka</option>
+                        <option value="LETIR">Letir</option>
                     </select>
-                    <button @click="closedModal" class="btn btn-primary">Saqlash</button>
+                    <button @click="crateWarehouse" class="btn btn-primary">Saqlash</button>
                 </div>
             </div>
         </div>
@@ -100,15 +170,15 @@ onMounted(async () => {
                         <tr v-for="(warehouse, idx) in warehouse" :key="warehouse.id">
                             <td>{{ idx + 1 }}</td> <!-- No. ustuni -->
                             <td>{{ warehouse.category }}</td>
-                            <td>{{ warehouse.products}}</td>
+                            <td>{{ warehouse.products?.[0]?.quantity ?? 0 }}</td>
                             <td>{{ warehouse.unit }}</td>
                             <td>
-                                <button class="update" @click="updateModal">
+                                <button class="update" @click="updateModal(warehouse)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
                                     </svg>
                                 </button>
-                                <button class="delete">
+                                <button class="delete"  @click="deleteWarehouse(warehouse.id)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                     </svg>
@@ -147,7 +217,7 @@ label {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* Qoraytirish */
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,7 +229,6 @@ label {
 
 }
 
-/* Oq rangdagi modal */
 .modal-content {
     background: white;
     padding: 20px;

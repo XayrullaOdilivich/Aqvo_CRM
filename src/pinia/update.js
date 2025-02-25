@@ -5,7 +5,7 @@ export const useUpdateStore = defineStore("updateStore", {
     actions: {
         async fetchPut(url, data, config = {}) {
             try {
-                const response = await api.put(url, data, config);
+                const response = await api.patch(url, data, config);
                 console.log("Serverdan javob:", response.data);
                 return response.data;
             } catch (error) {
