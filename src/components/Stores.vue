@@ -15,7 +15,7 @@ const showCreateModal = ref(false)
 
 const updateModal = (item) => {
     selectedShops.value = { ...item };
-    showUpdateModal.value = true;
+    showUpdateModal.value = true
 };
 
 const closedModal = () => {
