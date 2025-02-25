@@ -11,7 +11,7 @@ const toast = useToast();
 const selectedShops = ref(null);
 
 const showUpdateModal = ref(false)
-const showCreateModal = ref(false);
+const showCreateModal = ref(false)
 
 const updateModal = (item) => {
     selectedShops.value = { ...item };
