@@ -1,6 +1,16 @@
 <script setup>
-
 import SideBarSlot from "@/components/SideBarSlot.vue";
+import {useDynamicStore} from "@/pinia/store.js";
+import { ref, onMounted } from "vue";
+
+const store = useDynamicStore()
+const analytics = ref([]);
+
+onMounted(async () => {
+    await store.fetchData('analytics', '/analytics');
+    analytics.value = store.data.analytics
+    console.log(analytics.value)
+});
 </script>
 
 <template>
@@ -23,7 +33,12 @@ import SideBarSlot from "@/components/SideBarSlot.vue";
                              17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
                         </svg>
                         <h3>Ishlab chiqarilgan</h3>
-                        <p>Ma'lumot yuq</p>
+                        <div v-if="analytics.totalProduced">
+                            {{analytics.totalProduced}}
+                        </div>
+                        <div v-else>
+                            <p>Ma'lumot yuq</p>
+                        </div>
                     </div>
                     <div class="card ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -34,7 +49,12 @@ import SideBarSlot from "@/components/SideBarSlot.vue";
                              0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                         </svg>
                         <h3>Sotilgan</h3>
-                        <p>Ma'lumot yuq</p>
+                        <div v-if="analytics.totalSold">
+                            {{analytics.totalSold}}
+                        </div>
+                        <div v-else>
+                            <p>Ma'lumot yuq</p>
+                        </div>
                     </div>
                     <div class="card ">
                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 288 512"
@@ -49,7 +69,12 @@ import SideBarSlot from "@/components/SideBarSlot.vue";
                              16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z"></path>
                         </svg>
                         <h3>Umumiy tushum</h3>
-                        <p>Ma'lumot yuq so'm</p>
+                        <div v-if="analytics.totalProfit">
+                            {{analytics.totalProfit}} so'm
+                        </div>
+                        <div v-else>
+                            <p>Ma'lumot yuq</p>
+                        </div>
                     </div>
                 </div>
                 <div class="form">

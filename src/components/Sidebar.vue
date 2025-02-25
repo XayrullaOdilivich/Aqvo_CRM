@@ -26,7 +26,7 @@ const toggleSidebar = () => {
             <div>
                 <img src="/img.png" alt="img" class="logo">
             </div>
-            <router-link to="/" class="menu-link">
+            <router-link to="/admin" class="menu-link">
                 <div class="menu">
                     <svg
                          stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"

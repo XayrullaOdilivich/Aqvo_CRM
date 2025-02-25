@@ -7,9 +7,17 @@ const isAuthenticated = () => {
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
     {
       path: '/',
+      redirect: '/login',
+    },
+    {
+      path: '/login',
+      component: () => import('@/components/Login.vue')
+    },
+
+    {
+      path: '/admin',
       component: () => import('@/components/Analytics.vue')
     },
     {
@@ -40,6 +48,12 @@ const router = createRouter({
   ],
 })
 
-
+router.beforeEach((to, from, next) => {
+  if (to.path.startsWith('/admin') && !isAuthenticated()) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router
